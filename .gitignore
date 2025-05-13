@@ -1,0 +1,37 @@
+# ============================
+# Chỉ giữ lại assets/Scripts
+# ============================
+
+# Ignore tất cả trong thư mục assets
+/assets/*
+
+# Ngoại lệ: giữ lại thư mục Scripts và toàn bộ file trong đó
+!/assets/Scripts/
+!/assets/Scripts/**
+!/assets/Scripts/*.meta
+
+# ============================
+# Bỏ mọi thứ còn lại trong root
+# ============================
+
+/.creator/
+/library/
+/local/
+/profiles/
+/settings/
+/temp/
+
+# Bỏ file log, cache, hệ thống
+*.log
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# Nếu không cần tracking các meta khác (chỉ giữ meta của script)
+/assets/**/*.meta
+!/assets/Scripts/*.meta
+
+# Nếu bạn không muốn đưa các file cấu hình (tuỳ chọn)
+/package.json
+/tsconfig.json
+ 
