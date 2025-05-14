@@ -5,6 +5,8 @@ const { ccclass, property } = _decorator;
 
 import { Ground } from './Ground';
 import { Results } from './Results';
+import { Bird } from './Bird';
+import { PipePool } from './PipePool';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
@@ -20,6 +22,18 @@ export class GameCtrl extends Component {
         tooltip: "Result is here"
     })
     public results: Results;
+
+    @property({
+        type: Bird,
+        tooltip: "Bird is here"
+    })
+    public bird: Bird;
+
+    @property({
+        type: PipePool,
+        tooltip: "Pipe pool is here"
+    })
+    public pipeQueue: PipePool;
 
     @property({
         type: CCInteger
@@ -42,6 +56,10 @@ export class GameCtrl extends Component {
     iniListener() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
+        this.node.on(Node.EventType.TOUCH_START, () => {
+            this.bird.fly();
+        })
+
     }
 
     //testing method DELETE ME IN FINAL VERSION
@@ -55,6 +73,7 @@ export class GameCtrl extends Component {
                 break;
             case KeyCode.KEY_Q:
                 this.resetGame();
+                this.bird.resetBird();
         }
     }
 
@@ -70,7 +89,15 @@ export class GameCtrl extends Component {
 
     resetGame() {
         this.results.resetScore();
-
+        this.pipeQueue.reset();
         this.startGame();
+    }
+
+    passPipe() {
+        this.results.addScore();
+    }
+
+    createPipe() {
+        this.pipeQueue.addPool();
     }
 }
